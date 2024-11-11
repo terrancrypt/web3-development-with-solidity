@@ -7,4 +7,16 @@ export default {
   foundry_framework: '#5: Foundry Framework',
   smart_contract_testing: '#6: Smart Contract Testing',
   web3_front_end: '#7: Web3 Front-end',
+  vbi: {
+    title: 'VBI Academy',
+    type: 'page',
+    href: 'https://vbi.openedu.net/',
+    newWindow: true,
+  },
+  contact: {
+    title: 'Tường Thái',
+    type: 'page',
+    href: 'https://www.terrancrypt.com/',
+    newWindow: true,
+  },
 };

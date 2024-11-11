@@ -1,5 +1,16 @@
 # Mảng (Array) và Cấu trúc (Struct) trong Solidity
 
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+    <iframe src="https://www.youtube.com/embed/qQyIeuJ1tqo?si=jdbNItFf9ZGVJOam" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+</div>
+
 ## Mảng (Array)
 
 Mảng trong Solidity có thể là mảng tĩnh hoặc mảng động. Mảng tĩnh có kích thước cố định, trong khi mảng động có thể thay đổi kích thước.

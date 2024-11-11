@@ -1,15 +1,15 @@
 # Blockchain là gì? Và để làm gì?
 
-<iframe
-  width="100%"
-  height="500"
-  src="https://www.youtube.com/embed/KvcrUcNoxGw?si=OdlhMT7AxllUhs3I"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen
-></iframe>
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+    <iframe src="https://www.youtube.com/embed/KvcrUcNoxGw?si=OdlhMT7AxllUhs3I" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+</div>
 
 Bitcoin, được giới thiệu lần đầu tiên vào năm 2008 bởi một cá nhân hoặc nhóm người dưới bút danh Satoshi Nakamoto, là loại tiền điện tử đầu tiên và là ứng dụng đầu tiên của công nghệ blockchain. Bài báo trắng của Bitcoin, "Bitcoin: A Peer-to-Peer Electronic Cash System", đã đặt nền móng cho một hệ thống tiền tệ phi tập trung, không cần sự can thiệp của bên thứ ba như ngân hàng hoặc chính phủ.
 

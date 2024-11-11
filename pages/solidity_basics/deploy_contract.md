@@ -1,5 +1,16 @@
 # Triển khai Hợp đồng Thông minh với Remix IDE
 
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+    <iframe src="https://www.youtube.com/embed/e9udS5uiRYA?si=BqpHaZ4mdhlJ-hcu" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+</div>
+
 ## Bước 1: Truy cập Remix IDE
 
 1. Mở trình duyệt web và truy cập [Remix IDE](https://remix.ethereum.org/).

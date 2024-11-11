@@ -7,9 +7,8 @@ export default {
     'https://github.com/terrancrypt/web3-development-with-solidity',
   feedback: {
     content: 'Có câu hỏi? Hãy để lại feedback →',
-    title: 'Feedback cho “Web3 Development with Solidity”',
     useLink: () =>
-      `https://github.com/terrancrypt/web3-development-with-solidity/discussions/new?category=general&title=Feed back for "Web3 Development with Solidity"`,
+      `https://github.com/terrancrypt/web3-development-with-solidity/discussions/`,
   },
   editLink: {
     component: null,

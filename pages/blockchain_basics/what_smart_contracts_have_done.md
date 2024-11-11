@@ -1,6 +1,15 @@
 # Smart Contract đã làm được những gì?
 
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/b6uX9fndIhc?si=sbpoq5MbPAnJ4tWw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+    <iframe src="https://www.youtube.com/embed/b6uX9fndIhc?si=sbpoq5MbPAnJ4tWw" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+</div>
 
 Smart contract đã mang lại nhiều thay đổi đáng kể trong cách thức thực hiện các giao dịch và thỏa thuận. Dưới đây là một số ứng dụng và thành tựu nổi bật mà smart contract đã đạt được:
 
