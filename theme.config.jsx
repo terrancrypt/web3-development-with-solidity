@@ -29,9 +29,12 @@ export default {
     return (
       <>
         <meta property="og:url" content={url} />
+        <title>Web3 Development with Solidity - TerranCrypt</title>
+        <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <meta
           property="og:title"
           content={frontMatter.title || 'Web3 Development with Solidity'}
+          data-next-head
         />
         <meta
           property="og:description"
@@ -42,5 +45,16 @@ export default {
         />
       </>
     );
+  },
+  footer: {
+    content: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        <a href="https://terrancrypt.com" target="_blank">
+          TerranCrypt
+        </a>
+        .
+      </span>
+    ),
   },
 };
