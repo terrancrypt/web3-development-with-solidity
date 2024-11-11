@@ -16,9 +16,6 @@ export default {
   editLink: {
     component: null,
   },
-  toc: {
-    component: false,
-  },
   head() {
     const { asPath, defaultLocale, locale } = useRouter();
     const { frontMatter } = useConfig();
