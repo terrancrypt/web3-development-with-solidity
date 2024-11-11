@@ -39,3 +39,19 @@ library Math {
     }
 }
 ```
+
+Bạn có thể sử dụng `import` để sử dụng thư viện `Math` trong một hợp đồng khác:
+
+```solidity
+// MyContract.sol
+pragma solidity ^0.8.0;
+
+import "./Math.sol";
+
+contract MyContract {
+    function sum(uint a, uint b) public pure returns (uint) {
+        return Math.add(a, b);
+    }
+}
+
+Sử dụng `import` trong Solidity giúp mã nguồn trở nên dễ quản lý và tái sử dụng hơn. Điều này đặc biệt hữu ích khi phát triển các dự án lớn với nhiều hợp đồng thông minh.
