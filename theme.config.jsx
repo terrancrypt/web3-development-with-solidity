@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+import { useConfig } from 'nextra-theme-docs';
+
 export default {
   logo: <span>Web3 Development with Solidity</span>,
   project: {
