@@ -1,0 +1,69 @@
+# Gửi Ether Thông Qua Một Hàm trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="w7CAkD72zOM"/>
+
+Trong Solidity, bạn có thể gửi Ether từ một hợp đồng thông minh đến một địa chỉ khác thông qua một hàm. Điều này thường được thực hiện bằng cách sử dụng các phương thức như `transfer`, `send`, hoặc `call`. Mỗi phương thức có các đặc điểm và cách sử dụng khác nhau.
+
+## Phương thức Gửi Ether
+
+### 1. `transfer`
+
+- **Cú pháp**: `recipient.transfer(amount);`
+- **Đặc điểm**: 
+  - Gửi một lượng Ether cố định đến địa chỉ `recipient`.
+  - Tự động giới hạn gas ở mức 2300, đủ để thực hiện một thao tác ghi nhật ký sự kiện.
+  - Ném lỗi nếu giao dịch thất bại.
+
+### 2. `send`
+
+- **Cú pháp**: `bool success = recipient.send(amount);`
+- **Đặc điểm**: 
+  - Tương tự như `transfer`, nhưng trả về `false` nếu giao dịch thất bại thay vì ném lỗi.
+  - Cần kiểm tra giá trị trả về để xử lý lỗi.
+
+### 3. `call`
+
+- **Cú pháp**: `(bool success, ) = recipient.call{value: amount}("");`
+- **Đặc điểm**: 
+  - Linh hoạt hơn, cho phép chỉ định gas và dữ liệu.
+  - Trả về một cặp giá trị, cần kiểm tra `success` để xử lý lỗi.
+  - Được khuyến nghị sử dụng với các biện pháp bảo mật bổ sung.
+
+## Ví dụ về Gửi Ether
+
+Dưới đây là một ví dụ về cách sử dụng các phương thức trên để gửi Ether:
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract SendEtherExample {
+    // Hàm này cho phép hợp đồng nhận Ether
+    receive() external payable {}
+
+    // Gửi Ether bằng transfer
+    function sendViaTransfer(address payable recipient) public payable {
+        recipient.transfer(msg.value);
+    }
+
+    // Gửi Ether bằng send
+    function sendViaSend(address payable recipient) public payable {
+    bool success = recipient.send(msg.value);
+        require(success, "Send failed");
+    }
+
+    // Gửi Ether bằng call
+    function sendViaCall(address payable recipient) public payable {
+        (bool success, ) = recipient.call{value: msg.value}("");
+        require(success, "Call failed");
+    }
+}
+```
+
+## Lưu ý Bảo mật
+
+- **Reentrancy**: Khi sử dụng `call`, cần chú ý đến vấn đề tấn công tái nhập (reentrancy). Sử dụng mẫu thiết kế "Checks-Effects-Interactions" để giảm thiểu rủi ro.
+- **Gas Limit**: `transfer` và `send` giới hạn gas, điều này có thể không đủ cho các hợp đồng phức tạp. `call` cho phép chỉ định gas, nhưng cần cẩn thận để tránh tấn công từ chối dịch vụ (DoS).
+
+Sử dụng các phương thức gửi Ether một cách cẩn thận và đảm bảo rằng bạn đã thực hiện các biện pháp bảo mật cần thiết để bảo vệ hợp đồng của mình.

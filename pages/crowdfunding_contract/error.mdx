@@ -1,0 +1,50 @@
+# Custom Errors trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="BQdyvxpiWsQ"/>
+
+Custom errors là một tính năng mạnh mẽ trong Solidity giúp bạn viết mã nguồn hiệu quả hơn và tiết kiệm gas. Bằng cách sử dụng custom errors, bạn có thể cung cấp thông tin chi tiết về lỗi mà không cần sử dụng chuỗi thông báo lỗi dài dòng, giúp mã nguồn của bạn dễ đọc và bảo trì hơn.
+
+## Lợi Ích của Custom Errors
+
+- **Tiết Kiệm Gas**: Custom errors tiết kiệm gas hơn so với việc sử dụng chuỗi thông báo lỗi vì chúng không lưu trữ chuỗi trong nhật ký giao dịch.
+- **Cải Thiện Độ Rõ Ràng**: Custom errors giúp mã nguồn dễ đọc hơn và dễ bảo trì hơn.
+
+## Cách Định Nghĩa và Sử Dụng Custom Errors
+
+### Định Nghĩa Custom Error
+
+Bạn có thể định nghĩa một custom error bằng cách sử dụng từ khóa `error`, theo sau là tên lỗi và danh sách các tham số (nếu có).
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+
+contract Example {
+    // Định nghĩa custom error
+    error InsufficientBalance(uint256 available, uint256 required);
+
+    mapping(address => uint256) private balances;
+
+    // Hàm rút tiền
+    function withdraw(uint256 amount) public {
+        uint256 balance = balances[msg.sender];
+        if (balance < amount) {
+            // Sử dụng custom error
+            revert InsufficientBalance(balance, amount);
+        }
+        balances[msg.sender] -= amount;
+        payable(msg.sender).transfer(amount);
+    }
+
+    // Hàm nạp tiền
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;
+    }
+}
+```
+
+### Sử Dụng Custom Error
+
+Trong ví dụ trên, custom error `InsufficientBalance` được sử dụng trong hàm `withdraw` để kiểm tra xem người dùng có đủ số dư để rút tiền hay không. Nếu không đủ, hàm sẽ `revert` với custom error, cung cấp thông tin chi tiết về số dư hiện tại và số tiền yêu cầu.

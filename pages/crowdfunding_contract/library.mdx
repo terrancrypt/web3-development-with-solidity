@@ -1,0 +1,82 @@
+# Library trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="Ss7eKnM6p3Q"/>
+
+Trong Solidity, `library` là một loại hợp đồng đặc biệt được thiết kế để chứa các hàm có thể được sử dụng lại trong các hợp đồng khác. Libraries giúp giảm thiểu sự lặp lại mã, cải thiện tính rõ ràng và tối ưu hóa chi phí gas bằng cách chia sẻ mã giữa các hợp đồng.
+
+## Đặc Điểm của Library
+
+- **Không có trạng thái**: Libraries không thể có biến trạng thái. Chúng chỉ chứa các hàm và có thể sử dụng các biến trạng thái của hợp đồng gọi chúng.
+- **Không có hàm khởi tạo**: Libraries không thể có hàm khởi tạo (`constructor`).
+- **Tái sử dụng mã**: Libraries cho phép tái sử dụng mã giữa các hợp đồng mà không cần sao chép mã nguồn.
+
+## Cách Sử Dụng Library
+
+### 1. Khai Báo Library
+
+Libraries được khai báo bằng từ khóa `library`, theo sau là tên và phần thân của library.
+
+```solidity
+library Math {
+    function add(uint a, uint b) internal pure returns (uint) {
+        return a + b;
+    }
+
+    function subtract(uint a, uint b) internal pure returns (uint) {
+        return a - b;
+    }
+}
+```
+
+### 2. Sử Dụng Library
+
+Libraries có thể được sử dụng trong các hợp đồng khác bằng cách gọi trực tiếp các hàm của chúng hoặc sử dụng từ khóa `using for` để gán các hàm của library cho một kiểu dữ liệu cụ thể.
+
+#### Gọi Trực Tiếp
+
+```solidity
+contract Calculator {
+    function calculateSum(uint a, uint b) public pure returns (uint) {
+        return Math.add(a, b);
+    }
+}
+```
+
+#### Sử Dụng `using for`
+
+```solidity
+library ArrayUtils {
+    function find(uint[] storage self, uint value) internal view returns (uint) {
+        for (uint i = 0; i < self.length; i++) {
+            if (self[i] == value) {
+                return i;
+            }
+        }
+        revert("Value not found");
+    }
+}
+
+contract Data {
+    using ArrayUtils for uint[];
+    uint[] public data;
+
+    function addData(uint value) public {
+        data.push(value);
+    }
+
+    function findData(uint value) public view returns (uint) {
+        return data.find(value);
+    }
+}
+```
+
+
+## Lợi Ích của Library
+
+- **Tái sử dụng mã**: Giảm thiểu sự lặp lại mã và cải thiện khả năng bảo trì.
+- **Tối ưu hóa gas**: Chia sẻ mã giữa các hợp đồng giúp giảm chi phí triển khai và thực thi.
+- **Tính rõ ràng**: Tách biệt logic chung khỏi các hợp đồng cụ thể, giúp mã nguồn dễ đọc và dễ hiểu hơn.
+
+Libraries là một công cụ mạnh mẽ trong Solidity để quản lý và tái sử dụng mã một cách hiệu quả và an toàn.

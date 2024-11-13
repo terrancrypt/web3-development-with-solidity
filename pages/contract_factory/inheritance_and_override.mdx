@@ -1,4 +1,8 @@
 # Kế thừa và Ghi đè trong Solidity
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="zXiyWF99F_8"/>
+
 
 ## Kế thừa trong Solidity
 - **Kế thừa** là một tính năng cho phép một hợp đồng thừa hưởng các thuộc tính và phương thức từ một hợp đồng khác.
@@ -57,6 +61,7 @@ contract DerivedContract is BaseContract {
     function greet() public pure override returns (string memory) {
         return "Hello from DerivedContract";
     }
+}
 ```
 
 ## Kết luận

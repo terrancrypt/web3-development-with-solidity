@@ -1,0 +1,57 @@
+# Sử Dụng Chainlink Oracle Trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="LFnIif5xC1M"/>
+
+Chainlink cung cấp các dịch vụ oracle để đưa dữ liệu ngoài chuỗi vào blockchain, chẳng hạn như giá tài sản, thời tiết, và nhiều loại dữ liệu khác. Điều này mở rộng khả năng của các hợp đồng thông minh, cho phép chúng thực hiện các hành động dựa trên dữ liệu thực tế.
+
+## Cài đặt Chainlink
+
+Trước khi bắt đầu, bạn cần cài đặt thư viện Chainlink trong dự án của mình. Nếu bạn đang sử dụng Foundry, bạn có thể thêm thư viện Chainlink vào dự án của mình.
+
+## Ví dụ: Lấy giá ETH/USD
+
+Dưới đây là một ví dụ về cách sử dụng Chainlink để lấy giá ETH/USD trong hợp đồng thông minh:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// Import thư viện Chainlink
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
+contract PriceConsumerV3 {
+    AggregatorV3Interface internal priceFeed;
+
+    /**
+     * Khởi tạo hợp đồng với địa chỉ của Chainlink ETH/USD price feed
+     * Trên mạng Ethereum mainnet, địa chỉ là 0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419
+     * Trên các mạng khác, địa chỉ sẽ khác nhau
+     */
+    constructor() {
+        priceFeed = AggregatorV3Interface(0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419);
+    }
+
+    /**
+     * Lấy giá ETH/USD mới nhất
+     */
+    function getLatestPrice() public view returns (int) {
+        (
+            , 
+            int price,
+            ,
+            ,
+            
+        ) = priceFeed.latestRoundData();
+        return price;
+    }
+}
+```
+
+- **AggregatorV3Interface**: Đây là giao diện cho price feed của Chainlink. Nó cung cấp các hàm để lấy dữ liệu giá.
+- **priceFeed**: Biến này lưu trữ địa chỉ của price feed. Địa chỉ này khác nhau tùy thuộc vào mạng blockchain bạn đang sử dụng.
+- **getLatestPrice**: Hàm này gọi `latestRoundData` từ price feed để lấy giá ETH/USD mới nhất.
+
+
+Sử dụng Chainlink Oracle trong hợp đồng thông minh cho phép bạn truy cập dữ liệu ngoài chuỗi một cách an toàn và đáng tin cậy. Điều này mở rộng khả năng của các hợp đồng thông minh, cho phép chúng thực hiện các hành động dựa trên dữ liệu thực tế từ thế giới bên ngoài.

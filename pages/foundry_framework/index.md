@@ -1,0 +1,61 @@
+# Giới Thiệu Foundry Framework
+
+Foundry là một bộ công cụ phát triển mạnh mẽ dành cho Ethereum, được thiết kế để giúp các nhà phát triển xây dựng, kiểm tra, và triển khai các hợp đồng thông minh một cách hiệu quả. Foundry nổi bật với tốc độ nhanh, tính linh hoạt cao, và khả năng tích hợp tốt với các công cụ khác trong hệ sinh thái Ethereum.
+
+## Các Thành Phần Chính của Foundry
+
+Foundry bao gồm một số công cụ chính, mỗi công cụ phục vụ một mục đích cụ thể trong quá trình phát triển hợp đồng thông minh:
+
+### 1. **Forge**
+
+- **Mục đích**: Forge là công cụ xây dựng và kiểm tra hợp đồng thông minh. Nó cung cấp một môi trường phát triển nhanh chóng và hiệu quả cho Solidity.
+- **Tính năng**:
+  - Biên dịch hợp đồng thông minh với tốc độ cao.
+  - Chạy các bài kiểm tra đơn vị (unit tests) nhanh chóng.
+  - Hỗ trợ các tính năng tiên tiến như fuzz testing và property-based testing.
+
+### 2. **Cast**
+
+- **Mục đích**: Cast là công cụ tương tác với blockchain. Nó cho phép bạn gửi giao dịch, gọi hàm, và truy vấn dữ liệu từ các hợp đồng thông minh.
+- **Tính năng**:
+  - Gửi giao dịch và gọi hàm từ dòng lệnh.
+  - Truy vấn dữ liệu từ blockchain một cách dễ dàng.
+  - Hỗ trợ nhiều mạng blockchain khác nhau.
+
+### 3. **Anvil**
+
+- **Mục đích**: Anvil là một mạng blockchain cục bộ, tương tự như Ganache, giúp bạn kiểm tra và phát triển hợp đồng thông minh trong môi trường an toàn.
+- **Tính năng**:
+  - Khởi chạy một mạng blockchain cục bộ nhanh chóng.
+  - Cung cấp các tài khoản thử nghiệm với Ether miễn phí.
+  - Hỗ trợ các tính năng như forking từ mạng chính.
+
+## Lợi Ích của Foundry
+
+- **Tốc độ**: Foundry nổi bật với tốc độ biên dịch và kiểm tra nhanh chóng, giúp tăng hiệu suất phát triển.
+- **Tính linh hoạt**: Hỗ trợ nhiều tính năng tiên tiến và dễ dàng tích hợp với các công cụ khác trong hệ sinh thái Ethereum.
+- **Dễ sử dụng**: Cung cấp giao diện dòng lệnh thân thiện và tài liệu phong phú, giúp các nhà phát triển dễ dàng bắt đầu.
+
+## Cài Đặt và Sử Dụng
+
+Để bắt đầu với Foundry, bạn cần cài đặt các công cụ của nó. Dưới đây là hướng dẫn cài đặt cơ bản:
+
+1. **Cài đặt Foundry**: Bạn có thể cài đặt Foundry thông qua script cài đặt chính thức:
+
+   ```bash
+   curl -L https://foundry.paradigm.xyz | bash
+   ```
+
+2. **Thiết lập môi trường**: Sau khi cài đặt, bạn cần thiết lập môi trường bằng cách chạy:
+
+   ```bash
+   foundryup
+   ```
+
+3. **Khởi tạo dự án**: Tạo một dự án mới với Forge:
+
+   ```bash
+   forge init my-project
+   ```
+
+Foundry là một lựa chọn tuyệt vời cho các nhà phát triển Ethereum muốn tối ưu hóa quy trình phát triển hợp đồng thông minh của mình với các công cụ mạnh mẽ và linh hoạt.

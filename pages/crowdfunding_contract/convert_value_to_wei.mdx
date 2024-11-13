@@ -1,0 +1,48 @@
+# Chuyển đổi giá trị nhận về từ Chainlink Data Feed
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="KDMEj7IYziU"/>
+
+Để chuyển đổi giá trị nhận được từ Chainlink Price Feed thành Wei, bạn cần hiểu rằng giá trị từ price feed thường được trả về với độ chính xác là 8 chữ số thập phân. Điều này có nghĩa là giá trị trả về là giá trị thực nhân với 10^8. Để chuyển đổi giá trị này thành Wei, bạn cần thực hiện một số phép toán để điều chỉnh độ chính xác.
+
+Dưới đây là cách bạn có thể thực hiện điều này trong hợp đồng Solidity:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
+contract PriceConsumerV3 {
+    AggregatorV3Interface internal priceFeed;
+
+    constructor() {
+        // Địa chỉ của Chainlink ETH/USD price feed trên Ethereum mainnet
+        priceFeed = AggregatorV3Interface(0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419);
+    }
+
+    /**
+     * Lấy giá ETH/USD mới nhất và chuyển đổi thành Wei
+     */
+    function getLatestPriceInWei() public view returns (uint) {
+        (
+            , 
+            int price,
+            ,
+            ,
+            
+        ) = priceFeed.latestRoundData();
+        
+        // Chuyển đổi giá từ USD với độ chính xác 8 chữ số thành Wei
+        // 1 ETH = 10^18 Wei, do đó cần nhân với 10^10 để điều chỉnh từ 10^8 lên 10^18
+        uint priceInWei = uint(price) * 1e10;
+        return priceInWei;
+    }
+}
+```
+
+- `priceFeed.latestRoundData()`: Hàm này trả về giá ETH/USD với độ chính xác 8 chữ số thập phân.
+- `uint(price) * 1e10`: Chúng ta nhân giá trị này với \(10^{10}\) để chuyển đổi từ độ chính xác 8 chữ số thập phân (của USD) lên độ chính xác 18 chữ số thập phân (của Wei).
+
+Bằng cách thực hiện phép nhân với 10^10, bạn có thể chuyển đổi giá trị từ Chainlink Price Feed thành Wei, cho phép bạn sử dụng giá trị này trong các phép toán liên quan đến Ether trong hợp đồng thông minh của mình.

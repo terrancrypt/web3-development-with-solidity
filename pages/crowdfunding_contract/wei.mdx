@@ -1,0 +1,53 @@
+# Wei
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="VPC-saR_Y_o"/>
+
+Trong Ethereum, **Wei** là đơn vị nhỏ nhất của Ether, tương tự như cách mà cent là đơn vị nhỏ nhất của đô la Mỹ. Wei là đơn vị cơ bản nhất và không thể chia nhỏ hơn nữa. Tất cả các giao dịch và số dư trong Ethereum đều được tính bằng Wei để tránh các vấn đề về độ chính xác khi xử lý số thập phân.
+
+## Chuyển đổi giữa Wei và Ether
+
+Dưới đây là một số chuyển đổi phổ biến giữa Wei và các đơn vị lớn hơn của Ether:
+
+- 1 Ether (ETH) = 1,000,000,000,000,000,000 Wei (10^18 Wei)
+- 1 Gwei (Gigawei) = 1,000,000,000 Wei (10^9 Wei)
+- 1 Mwei (Megawei) = 1,000,000 Wei (10^6 Wei)
+- 1 Kwei (Kilowei) = 1,000 Wei (10^3 Wei)
+
+## Sử dụng Wei trong Solidity
+
+Trong Solidity, khi bạn làm việc với Ether, bạn thường sẽ làm việc với Wei để đảm bảo độ chính xác. Ví dụ, khi bạn gửi hoặc nhận Ether trong một hợp đồng thông minh, số tiền đó sẽ được biểu diễn bằng Wei.
+
+## Ví dụ
+
+Dưới đây là một ví dụ về cách sử dụng Wei trong một hợp đồng Solidity:
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract WeiExample {
+    // Hàm này cho phép hợp đồng nhận Ether
+    function deposit() public payable {
+        // msg.value chứa số lượng Wei được gửi
+    }
+
+    // Hàm này trả về số dư của hợp đồng bằng Wei
+    function getBalanceInWei() public view returns (uint) {
+        return address(this).balance;
+    }
+
+    // Hàm này trả về số dư của hợp đồng bằng Ether
+    function getBalanceInEther() public view returns (uint) {
+        return address(this).balance / 1 ether;
+    }
+}
+```
+
+Trong ví dụ trên:
+
+- Hàm deposit cho phép hợp đồng nhận Ether, và msg.value chứa số lượng Wei được gửi.
+- Hàm getBalanceInWei trả về số dư của hợp đồng bằng Wei.
+- Hàm getBalanceInEther trả về số dư của hợp đồng bằng Ether bằng cách chia số dư Wei cho 1 ether, một cách viết tắt trong Solidity để biểu diễn 10^18 Wei.
+
+Sử dụng Wei giúp đảm bảo rằng các phép tính tài chính trong hợp đồng thông minh là chính xác và không bị ảnh hưởng bởi các vấn đề về số thập phân.

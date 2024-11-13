@@ -1,0 +1,34 @@
+# Lấy RPC-URL Cá Nhân Trên Alchemy
+
+Alchemy là một nền tảng phát triển blockchain mạnh mẽ, cung cấp các công cụ và dịch vụ để kết nối với các mạng blockchain như Ethereum, Polygon, và nhiều mạng khác. Dưới đây là cách lấy RPC-URL cá nhân trên Alchemy.
+
+## Bước 1: Đăng ký hoặc đăng nhập
+
+1. **Truy cập Alchemy**: Mở trình duyệt và truy cập trang web [Alchemy](https://www.alchemy.com/).
+2. **Đăng ký hoặc đăng nhập**: Nếu bạn chưa có tài khoản, hãy đăng ký một tài khoản mới. Nếu đã có tài khoản, hãy đăng nhập.
+
+## Bước 2: Tạo ứng dụng mới
+
+1. **Tạo ứng dụng**: Sau khi đăng nhập, bạn sẽ được chuyển đến bảng điều khiển (dashboard). Nhấp vào nút "Create App" hoặc "New App" để tạo một ứng dụng mới.
+2. **Điền thông tin ứng dụng**:
+   - **Name**: Đặt tên cho ứng dụng của bạn.
+   - **Description**: Mô tả ngắn gọn về ứng dụng (tùy chọn).
+   - **Chain**: Chọn mạng blockchain mà bạn muốn kết nối (ví dụ: Ethereum, Polygon).
+   - **Network**: Chọn mạng cụ thể (ví dụ: Mainnet, Ropsten, Rinkeby).
+
+3. **Tạo ứng dụng**: Nhấp vào nút "Create App" để hoàn tất quá trình tạo ứng dụng.
+
+## Bước 3: Lấy RPC-URL
+
+1. **Truy cập ứng dụng**: Sau khi tạo, ứng dụng của bạn sẽ xuất hiện trong bảng điều khiển. Nhấp vào tên ứng dụng để mở trang chi tiết.
+2. **Lấy RPC-URL**: Trên trang chi tiết của ứng dụng, bạn sẽ thấy một phần có tiêu đề "API Key" hoặc "HTTP". Đây là nơi bạn có thể tìm thấy RPC-URL cá nhân của mình. URL này thường có dạng:
+
+   ```
+   https://<network>.alchemyapi.io/v2/<your-api-key>
+   ```
+
+   Thay `<network>` bằng tên mạng bạn đã chọn (ví dụ: eth-mainnet) và `<your-api-key>` bằng khóa API của bạn.
+
+## Kết luận
+
+Với RPC-URL cá nhân từ Alchemy, bạn có thể kết nối ứng dụng của mình với mạng blockchain đã chọn và bắt đầu phát triển hoặc tương tác với các hợp đồng thông minh. Alchemy cung cấp một giao diện dễ sử dụng và các công cụ mạnh mẽ để hỗ trợ quá trình phát triển blockchain của bạn.

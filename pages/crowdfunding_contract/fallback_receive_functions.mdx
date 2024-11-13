@@ -1,0 +1,90 @@
+# Fallback và Receive Function trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="yBg4gS7j5zE"/>
+
+## Receive Function
+
+`receive` là một hàm đặc biệt được giới thiệu trong Solidity 0.6.0, được sử dụng để nhận Ether khi một giao dịch không có dữ liệu được gửi đến hợp đồng.
+
+### Đặc Điểm
+
+- Không có tên hàm.
+- Không có tham số.
+- Không trả về giá trị.
+- Có thể có từ khóa `payable`.
+
+### Cú Pháp
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Example {
+    event Received(address, uint);
+
+    // Hàm receive để nhận Ether
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
+    }
+}
+```
+
+## Fallback Function
+
+`fallback` là một hàm đặc biệt được gọi khi một giao dịch không khớp với bất kỳ hàm nào khác trong hợp đồng hoặc khi không có hàm `receive` và giao dịch có dữ liệu.
+
+### Đặc Điểm
+
+- Không có tên hàm.
+- Không có tham số.
+- Không trả về giá trị.
+- Có thể có từ khóa `payable` nếu bạn muốn nó có thể nhận Ether.
+
+### Cú Pháp
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Example {
+    event FallbackCalled(address, uint);
+
+    // Hàm fallback để xử lý các giao dịch không khớp
+    fallback() external payable {
+        emit FallbackCalled(msg.sender, msg.value);
+    }
+}
+```
+
+## Sử Dụng Cả Hai
+
+Bạn có thể sử dụng cả `receive` và `fallback` trong cùng một hợp đồng để xử lý các trường hợp khác nhau:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Example {
+    event Received(address, uint);
+    event FallbackCalled(address, uint);
+
+    // Hàm receive để nhận Ether khi không có dữ liệu
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
+    }
+
+    // Hàm fallback để xử lý các giao dịch không khớp
+    fallback() external payable {
+        emit FallbackCalled(msg.sender, msg.value);
+    }
+}
+```
+
+## Kết Luận
+
+- **Receive Function**: Được sử dụng để nhận Ether khi giao dịch không có dữ liệu.
+- **Fallback Function**: Được sử dụng khi giao dịch không khớp với bất kỳ hàm nào khác hoặc khi không có hàm `receive` và giao dịch có dữ liệu.
+
+Sử dụng `receive` và `fallback` giúp bạn kiểm soát cách hợp đồng của bạn xử lý các giao dịch Ether không khớp hoặc không có dữ liệu, đảm bảo rằng hợp đồng của bạn hoạt động đúng như mong đợi trong mọi tình huống.

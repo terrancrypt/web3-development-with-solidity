@@ -1,0 +1,58 @@
+# Kiểm tra Điều kiện với `if/else` và `revert()` trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="-msnfvuCaLM"/>
+
+Trong Solidity, ngoài việc sử dụng `require` để thực hiện kiểm tra điều kiện, bạn cũng có thể sử dụng cấu trúc điều kiện `if/else` kết hợp với `revert()` để kiểm soát luồng thực thi và xử lý các tình huống lỗi. `revert()` cho phép bạn hủy bỏ giao dịch và hoàn nguyên mọi thay đổi trạng thái nếu một điều kiện không được thỏa mãn.
+
+## Cấu trúc `if/else`
+
+Cấu trúc `if/else` trong Solidity hoạt động tương tự như trong các ngôn ngữ lập trình khác. Nó cho phép bạn thực hiện các hành động khác nhau dựa trên các điều kiện logic.
+
+### Ví dụ về `if/else`
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract IfElseExample {
+    function checkValue(uint value) public pure returns (string memory) {
+        if (value > 10) {
+            return "Value is greater than 10";
+        } else {
+            return "Value is 10 or less";
+        }
+    }
+}
+```
+
+Trong ví dụ này, hàm `checkValue` sử dụng `if/else` để kiểm tra xem giá trị có lớn hơn 10 hay không và trả về thông báo tương ứng.
+
+## Sử dụng `revert()`
+
+`revert()` là một hàm trong Solidity được sử dụng để hủy bỏ giao dịch và hoàn nguyên mọi thay đổi trạng thái. Nó thường được sử dụng trong các khối `if` để xử lý các điều kiện lỗi.
+
+### Ví dụ về `revert()`
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract RevertExample {
+    function divide(uint a, uint b) public pure returns (uint) {
+        if (b == 0) {
+            revert("Division by zero is not allowed");
+        }
+        return a / b;
+    }
+}
+```
+
+Trong ví dụ này, hàm `divide` sử dụng `revert()` để hủy bỏ giao dịch nếu giá trị `b` bằng 0, ngăn chặn lỗi chia cho 0.
+
+## Lợi ích của việc sử dụng `if/else` và `revert()`
+
+- **Kiểm soát luồng**: Cung cấp khả năng kiểm soát luồng thực thi dựa trên các điều kiện logic.
+- **Xử lý lỗi**: Cho phép xử lý các tình huống lỗi một cách rõ ràng và có thể tùy chỉnh thông báo lỗi.
+- **Bảo mật**: Ngăn chặn các hành động không mong muốn hoặc không hợp lệ bằng cách hủy bỏ giao dịch khi điều kiện không được thỏa mãn.
+
+Sử dụng `if/else` và `revert()` là một cách linh hoạt để thực hiện kiểm tra điều kiện và xử lý lỗi trong các hợp đồng thông minh Solidity.

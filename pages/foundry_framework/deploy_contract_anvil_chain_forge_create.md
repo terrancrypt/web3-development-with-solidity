@@ -1,0 +1,42 @@
+# Triển Khai Hợp Đồng Lên Anvil Chain Bằng `forge create`
+
+Sau khi đã cài đặt Foundry và khởi chạy Anvil, bạn có thể triển khai hợp đồng thông minh của mình lên Anvil Chain bằng cách sử dụng lệnh `forge create`. Dưới đây là các bước chi tiết để thực hiện điều này.
+
+## Bước 1: Khởi Tạo Anvil
+
+Trước tiên, hãy đảm bảo rằng Anvil đang chạy. Mở Terminal và chạy lệnh sau để khởi tạo Anvil:
+```bash
+anvil
+```
+
+Anvil sẽ khởi chạy một mạng blockchain cục bộ và cung cấp thông tin về các tài khoản thử nghiệm và địa chỉ RPC (thường là `http://127.0.0.1:8545`).
+
+## Bước 2: Biên Dịch Hợp Đồng
+
+Trước khi triển khai, bạn cần biên dịch hợp đồng của mình. Chạy lệnh sau trong thư mục dự án của bạn:
+
+```bash
+forge build
+```
+
+Lệnh này sẽ biên dịch tất cả các hợp đồng trong thư mục `src/` và tạo ra các tệp nhị phân trong thư mục `out/`.
+
+## Bước 3: Triển Khai Hợp Đồng
+
+Sử dụng lệnh `forge create` để triển khai hợp đồng lên Anvil Chain. Bạn cần chỉ định tên hợp đồng, địa chỉ RPC của Anvil, và khóa riêng của một trong các tài khoản thử nghiệm. Dưới đây là cú pháp lệnh:
+```bash
+forge create --rpc-url http://127.0.0.1:8545 --private-key <PRIVATE_KEY> src/Contract.sol:Contract
+```
+
+
+- **`<PRIVATE_KEY>`**: Thay thế bằng khóa riêng của một trong các tài khoản thử nghiệm được Anvil cung cấp. Bạn có thể tìm thấy khóa riêng này trong đầu ra của lệnh `anvil`.
+
+- **`src/Contract.sol:Contract`**: Thay thế `Contract` bằng tên tệp và tên hợp đồng của bạn.
+
+## Bước 4: Xác Nhận Triển Khai
+
+Sau khi triển khai, `forge create` sẽ hiển thị địa chỉ của hợp đồng đã được triển khai trên Anvil Chain. Bạn có thể sử dụng địa chỉ này để tương tác với hợp đồng thông qua các công cụ như Cast hoặc các script tùy chỉnh.
+
+## Kết Luận
+
+Với `forge create`, bạn có thể dễ dàng triển khai hợp đồng thông minh lên Anvil Chain để phát triển và kiểm tra trong môi trường cục bộ. Điều này giúp bạn tiết kiệm thời gian và chi phí khi phát triển trên mạng chính, đồng thời cung cấp một môi trường an toàn để thử nghiệm các tính năng mới.

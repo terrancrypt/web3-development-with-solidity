@@ -1,0 +1,70 @@
+# Kiểm tra Điều kiện với `require` trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="WIrU0vvG_6E"/>
+
+Trong Solidity, `require` là một hàm quan trọng được sử dụng để thực hiện kiểm tra điều kiện (validation) trong các hợp đồng thông minh. Nếu điều kiện được truyền vào `require` không được thỏa mãn, giao dịch sẽ bị hủy và mọi thay đổi trạng thái sẽ được hoàn nguyên. Điều này giúp bảo vệ hợp đồng khỏi các trạng thái không mong muốn và đảm bảo rằng các điều kiện tiên quyết được đáp ứng trước khi thực hiện các hành động nhất định.
+
+## Cách sử dụng `require`
+
+Cú pháp của `require` như sau:
+
+```solidity
+require(condition, "Error message");
+```
+
+
+- **`condition`**: Biểu thức logic cần kiểm tra. Nếu biểu thức này trả về `false`, giao dịch sẽ bị hủy.
+- **`"Error message"`**: (Tùy chọn) Thông báo lỗi sẽ được trả về nếu điều kiện không được thỏa mãn. Thông báo này giúp người dùng hiểu lý do tại sao giao dịch bị hủy.
+
+## Ví dụ về `require`
+
+Dưới đây là một số ví dụ về cách sử dụng `require` trong các tình huống khác nhau:
+
+1. **Kiểm tra số dư đủ**:
+
+   ```solidity
+   function withdraw(uint amount) public {
+       require(amount <= address(this).balance, "Insufficient balance");
+       payable(msg.sender).transfer(amount);
+   }
+   ```
+
+   Trong ví dụ này, `require` đảm bảo rằng số tiền rút không vượt quá số dư hiện tại của hợp đồng. Nếu không, giao dịch sẽ bị hủy với thông báo "Insufficient balance".
+
+2. **Kiểm tra quyền truy cập**:
+
+```solidity
+address public owner;
+
+constructor() {
+       owner = msg.sender;
+}
+
+function restrictedFunction() public {
+    require(msg.sender == owner, "Only owner can call this function");
+    // Thực hiện các hành động chỉ dành cho chủ sở hữu
+}
+```
+
+Ở đây, `require` được sử dụng để đảm bảo rằng chỉ có chủ sở hữu hợp đồng mới có thể gọi hàm `restrictedFunction`.
+
+3. **Kiểm tra điều kiện đầu vào**:
+
+   ```solidity
+   function setAge(uint age) public {
+       require(age > 0, "Age must be greater than zero");
+       // Lưu trữ tuổi
+   }
+   ```
+
+Trong ví dụ này, `require` đảm bảo rằng giá trị `age` được truyền vào lớn hơn 0 trước khi thực hiện các hành động tiếp theo.
+
+## Lợi ích của `require`
+
+- **Bảo mật**: Ngăn chặn các hành động không mong muốn hoặc không hợp lệ.
+- **Hiệu quả**: Giảm thiểu chi phí gas bằng cách dừng thực thi sớm nếu điều kiện không được thỏa mãn.
+- **Thông báo lỗi rõ ràng**: Cung cấp thông báo lỗi giúp người dùng hiểu lý do tại sao giao dịch bị hủy.
+
+Sử dụng `require` là một phần quan trọng trong việc viết các hợp đồng thông minh an toàn và đáng tin cậy.

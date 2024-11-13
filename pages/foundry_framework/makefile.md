@@ -1,0 +1,44 @@
+# Sử Dụng Makefile Để Triển Khai và Xác Minh Hợp Đồng
+
+Makefile là một công cụ mạnh mẽ để tự động hóa các tác vụ trong dự án của bạn. Bạn có thể sử dụng Makefile để triển khai và xác minh hợp đồng thông minh một cách dễ dàng và nhất quán.
+
+## Bước 1: Tạo Makefile
+
+Tạo một tệp có tên `Makefile` trong thư mục gốc của dự án của bạn. Trong tệp này, bạn có thể định nghĩa các mục tiêu (targets) để triển khai và xác minh hợp đồng.
+
+### Ví Dụ Makefile
+
+Dưới đây là một ví dụ về Makefile để triển khai và xác minh hợp đồng:
+
+```makefile
+# Makefile
+
+# Biến môi trường
+RPC_URL=https://eth-sepolia.alchemyapi.io/v2/YOUR_ALCHEMY_API_KEY
+PRIVATE_KEY=your_private_key_here
+ETHERSCAN_API_KEY=your_etherscan_api_key_here
+
+# Mục tiêu triển khai và xác minh
+deploy:
+	source .env && forge script script/DeployAndVerify.s.sol --rpc-url $(RPC_URL) --private-key $(PRIVATE_KEY) --verify --etherscan-api-key $(ETHERSCAN_API_KEY) --broadcast
+```
+
+Thay `YOUR_ALCHEMY_API_KEY`, `your_private_key_here`, và `your_etherscan_api_key_here` bằng thông tin thực tế của bạn.
+
+## Bước 2: Sử Dụng Makefile
+
+Sau khi tạo Makefile, bạn có thể sử dụng lệnh `make` để thực hiện các tác vụ được định nghĩa trong Makefile.
+
+### Triển Khai và Xác Minh Hợp Đồng
+
+Chạy lệnh sau trong Terminal để triển khai và xác minh hợp đồng:
+
+```
+make deploy
+```
+
+Lệnh này sẽ thực hiện các bước được định nghĩa trong mục tiêu `deploy`, bao gồm việc triển khai và xác minh hợp đồng.
+
+## Kết Luận
+
+Sử dụng Makefile giúp bạn tự động hóa các tác vụ lặp đi lặp lại trong quá trình phát triển, đảm bảo rằng các bước triển khai và xác minh được thực hiện một cách nhất quán và hiệu quả. Điều này giúp tiết kiệm thời gian và giảm thiểu lỗi trong quá trình phát triển.

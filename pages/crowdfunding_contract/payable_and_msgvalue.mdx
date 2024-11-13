@@ -1,0 +1,58 @@
+# Payable & `msg.value`
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="TEDny7eX37Q"/>
+
+Trong Solidity, `payable` và `msg.value` là hai khái niệm quan trọng liên quan đến việc xử lý các giao dịch tài chính trên blockchain Ethereum. Dưới đây là giải thích chi tiết về từng khái niệm:
+
+## `payable`
+
+- **`payable`** là một từ khóa trong Solidity được sử dụng để chỉ định rằng một hàm có thể nhận Ether. Khi một hàm được đánh dấu là `payable`, nó có thể được gọi kèm theo một lượng Ether nhất định.
+
+- Hàm `payable` thường được sử dụng trong các hợp đồng thông minh để nhận tiền từ người dùng. Ví dụ, trong một hợp đồng crowdfunding, hàm `contribute` có thể được đánh dấu là `payable` để cho phép người dùng gửi tiền vào hợp đồng.
+
+## `msg.value`
+
+- **`msg.value`** là một thuộc tính trong Solidity, đại diện cho số lượng Wei (đơn vị nhỏ nhất của Ether) được gửi cùng với một giao dịch. Khi một hàm `payable` được gọi, `msg.value` sẽ chứa số lượng Ether mà người gọi đã gửi.
+
+- `msg.value` thường được sử dụng trong các hàm `payable` để xác định số tiền mà người dùng đã gửi và thực hiện các hành động tương ứng, chẳng hạn như ghi nhận số tiền đóng góp trong một hợp đồng crowdfunding.
+
+## Ví dụ
+
+Dưới đây là một ví dụ đơn giản minh họa cách sử dụng `payable` và `msg.value` trong một hợp đồng Solidity:
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract SimpleWallet {
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // Hàm này cho phép hợp đồng nhận Ether
+    function deposit() public payable {
+        // msg.value chứa số lượng Ether được gửi
+    }
+
+    // Hàm này cho phép chủ sở hữu rút toàn bộ số Ether từ hợp đồng
+    function withdraw() public {
+        require(msg.sender == owner, "Only owner can withdraw");
+        payable(owner).transfer(address(this).balance);
+    }
+
+    // Hàm này trả về số dư của hợp đồng
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+}
+```
+
+Trong ví dụ trên:
+
+- Hàm `deposit` được đánh dấu là `payable`, cho phép nó nhận Ether. Khi người dùng gửi Ether đến hàm này, số lượng Ether đó sẽ được lưu trữ trong hợp đồng.
+- `msg.value` có thể được sử dụng trong hàm `deposit` để biết số lượng Ether mà người dùng đã gửi.
+- Hàm `withdraw` cho phép chủ sở hữu hợp đồng rút toàn bộ số Ether đã được gửi vào hợp đồng.
+  

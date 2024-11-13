@@ -1,0 +1,74 @@
+# Modifier trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="gc2o0OyE6dE"/>
+
+Trong Solidity, `modifier` là một tính năng mạnh mẽ cho phép bạn thay đổi hành vi của các hàm. Modifiers được sử dụng để thêm các điều kiện tiên quyết hoặc logic bổ sung vào các hàm mà không cần phải lặp lại mã nguồn. Điều này giúp cải thiện tính rõ ràng và khả năng tái sử dụng của mã nguồn.
+
+## Cách Sử Dụng Modifier
+
+### Khai báo Modifier
+
+Modifiers được khai báo bằng từ khóa `modifier`, theo sau là tên và phần thân của modifier. Phần thân có thể chứa các điều kiện hoặc logic cần thiết. Để chỉ định vị trí mà phần thân của hàm sẽ được thực thi, bạn sử dụng từ khóa `_`.
+
+```solidity
+modifier onlyOwner() {
+    require(msg.sender == owner, "Not the contract owner");
+}
+```
+
+### Áp dụng Modifier
+
+Modifiers được áp dụng cho các hàm bằng cách thêm tên modifier sau khai báo hàm. Bạn có thể áp dụng nhiều modifiers cho một hàm.
+
+```solidity
+function restrictedFunction() public onlyOwner {
+// Logic của hàm
+}
+```
+
+## Ví dụ về Modifier
+
+Dưới đây là một ví dụ minh họa cách sử dụng modifier trong Solidity:
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract ModifierExample {
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // Khai báo một modifier để kiểm tra quyền sở hữu
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the contract owner");
+    }
+
+    // Hàm này chỉ có thể được gọi bởi chủ sở hữu
+    function changeOwner(address newOwner) public onlyOwner {
+        owner = newOwner;
+    }
+
+    // Modifier để kiểm tra số dư tối thiểu
+    modifier costs(uint price) {
+        require(msg.value >= price, "Insufficient Ether provided");
+    }
+
+    // Hàm yêu cầu một số Ether tối thiểu để thực thi
+    function buy() public payable costs(1 ether) {
+    // Logic mua hàng
+    }
+}
+```
+
+
+## Lợi Ích của Modifier
+
+- **Tái sử dụng mã**: Giảm thiểu sự lặp lại mã bằng cách tách biệt các điều kiện tiên quyết và logic bổ sung.
+- **Tính rõ ràng**: Cải thiện tính rõ ràng của mã nguồn bằng cách tách biệt logic kiểm tra khỏi logic chính của hàm.
+- **Bảo trì dễ dàng**: Dễ dàng cập nhật hoặc thay đổi các điều kiện tiên quyết mà không cần sửa đổi từng hàm riêng lẻ.
+
+Modifiers là một công cụ hữu ích trong Solidity để quản lý quyền truy cập và điều kiện thực thi của các hàm một cách hiệu quả và an toàn.

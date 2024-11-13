@@ -1,0 +1,42 @@
+# Bảo Mật RPC URL Với Tệp `.env` Trong Foundry
+
+## Bước 1: Tạo tệp `.env`
+
+Tạo một tệp `.env` trong thư mục gốc của dự án Foundry của bạn. Trong tệp này, bạn có thể lưu trữ RPC URL và các thông tin nhạy cảm khác. Ví dụ:
+```
+# .env
+RPC_URL=https://eth-sepolia.alchemyapi.io/v2/YOUR_ALCHEMY_API_KEY
+PRIVATE_KEY=your_private_key_here
+```
+
+Thay `YOUR_ALCHEMY_API_KEY` và `your_private_key_here` bằng thông tin thực tế của bạn.
+
+## Bước 2: Sử dụng biến môi trường trong script
+
+Trong các script của bạn, bạn có thể sử dụng các biến môi trường này bằng cách sử dụng lệnh `source` để tải chúng vào môi trường shell trước khi chạy lệnh `forge`.
+
+### Ví dụ: Triển khai hợp đồng
+
+Khi bạn muốn triển khai hợp đồng, bạn có thể sử dụng lệnh sau trong Terminal:
+
+```bash
+source .env && forge script script/Deploy.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+```
+
+
+Lệnh `source .env` sẽ tải các biến môi trường từ tệp `.env` vào môi trường shell hiện tại, và sau đó bạn có thể sử dụng chúng trong lệnh `forge`.
+
+## Bước 3: Bảo mật tệp `.env`
+
+- **Không Đưa Lên Git**: Đảm bảo rằng tệp `.env` không được đưa lên hệ thống quản lý mã nguồn như Git. Thêm dòng sau vào tệp `.gitignore` của bạn:
+
+  ```
+  # .gitignore
+  .env
+  ```
+
+- **Kiểm Soát Quyền Truy Cập**: Đảm bảo rằng chỉ những người cần thiết mới có quyền truy cập vào tệp `.env`.
+
+## Kết luận
+
+Sử dụng tệp `.env` để lưu trữ thông tin nhạy cảm như RPC URL và khóa API là một cách tốt để bảo mật chúng trong dự án Foundry của bạn. Điều này giúp bạn giữ cho thông tin nhạy cảm không bị lộ ra ngoài và dễ dàng quản lý trong quá trình phát triển ứng dụng.

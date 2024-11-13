@@ -1,0 +1,78 @@
+# Biến `immutable` và Hàm `constructor()` trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="YYZJ4iuZD1E"/>
+
+## Biến `immutable`
+
+Biến `immutable` trong Solidity là một loại biến có thể được gán giá trị một lần duy nhất trong hàm khởi tạo (`constructor`) và không thể thay đổi sau đó. Biến `immutable` kết hợp lợi ích của biến `constant` với sự linh hoạt của việc khởi tạo giá trị tại thời điểm triển khai hợp đồng.
+
+### Đặc điểm của biến `immutable`
+
+- **Gán một lần**: Giá trị của biến `immutable` chỉ có thể được gán một lần trong hàm `constructor`.
+- **Không thể thay đổi**: Sau khi được gán, giá trị của biến `immutable` không thể thay đổi trong suốt vòng đời của hợp đồng.
+- **Tiết kiệm gas**: Giống như biến `constant`, biến `immutable` cũng giúp tiết kiệm chi phí gas vì giá trị của chúng được lưu trữ trực tiếp trong mã bytecode.
+
+### Cách khai báo biến `immutable`
+
+Biến `immutable` được khai báo bằng cách sử dụng từ khóa `immutable` sau kiểu dữ liệu của biến. Dưới đây là một ví dụ:
+
+```solidity
+pragma solidity ^0.8.0;
+contract ImmutableExample {
+    // Khai báo một biến immutable
+    address public immutable owner;
+
+    // Khởi tạo biến immutable trong constructor
+    constructor(address owner) {
+        owner = owner;
+    }
+
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+}
+```
+
+
+## Hàm `constructor()`
+
+Hàm `constructor()` trong Solidity là một hàm đặc biệt được gọi một lần duy nhất khi hợp đồng được triển khai. Nó được sử dụng để khởi tạo trạng thái của hợp đồng và gán giá trị cho các biến `immutable`.
+
+### Đặc điểm của hàm `constructor()`
+
+- **Chạy một lần**: Hàm `constructor` chỉ được gọi một lần khi hợp đồng được triển khai.
+- **Khởi tạo trạng thái**: Được sử dụng để thiết lập các giá trị ban đầu cho các biến trạng thái, bao gồm cả biến `immutable`.
+- **Không có kiểu trả về**: Hàm `constructor` không có kiểu trả về và không thể được gọi lại sau khi hợp đồng đã được triển khai.
+
+### Ví dụ về hàm `constructor()`
+
+Dưới đây là một ví dụ về cách sử dụng hàm `constructor` để khởi tạo biến `immutable`:
+
+```solidity
+pragma solidity ^0.8.0;
+contract ConstructorExample {
+    uint256 public immutable creationTime;
+
+    // Khởi tạo biến immutable trong constructor
+    constructor() {
+        creationTime = block.timestamp;
+    }
+
+    function getCreationTime() public view returns (uint256) {
+        return creationTime;
+    }
+}
+```
+
+
+Trong ví dụ này, biến `creationTime` được khởi tạo với giá trị thời gian hiện tại khi hợp đồng được triển khai và không thể thay đổi sau đó.
+
+## Lợi ích của việc sử dụng biến `immutable` và hàm `constructor()`
+
+- **Hiệu suất**: Giảm chi phí gas khi truy cập các giá trị không thay đổi.
+- **Tính linh hoạt**: Cho phép khởi tạo giá trị tại thời điểm triển khai hợp đồng.
+- **Bảo mật**: Ngăn chặn việc thay đổi giá trị sau khi khởi tạo, giúp bảo vệ trạng thái hợp đồng.
+
+Sử dụng biến `immutable` và hàm `constructor` là một thực hành tốt trong Solidity để đảm bảo tính nhất quán và hiệu quả của hợp đồng thông minh.

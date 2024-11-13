@@ -1,0 +1,63 @@
+# Tích Hợp Chainlink Data Feed Vào Hợp Đồng Có Sẵn Trong Remix
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="qUYC7qmfqiw"/>
+
+## Bước 1: Thêm Import Chainlink
+
+1. **Mở Hợp Đồng**: Mở hợp đồng của bạn trong Remix.
+2. **Thêm Import**: Thêm dòng import cho Chainlink AggregatorV3Interface vào đầu hợp đồng của bạn:
+
+```solidity
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+```
+
+## Bước 2: Khai Báo Biến Price Feed
+
+1. **Khai Báo Biến**: Thêm một biến để lưu trữ địa chỉ của Chainlink Price Feed:
+
+```solidity
+AggregatorV3Interface internal priceFeed;
+```
+
+## Bước 3: Khởi Tạo Price Feed
+
+1. **Khởi Tạo Trong Constructor**: Trong hàm constructor của hợp đồng, khởi tạo price feed với địa chỉ phù hợp:
+
+```solidity
+constructor() {
+    // Địa chỉ này là cho Ethereum mainnet, thay đổi nếu bạn sử dụng mạng khác
+    priceFeed = AggregatorV3Interface(0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419);
+}
+```
+
+## Bước 4: Thêm Hàm Lấy Giá
+
+1. **Thêm Hàm**: Thêm một hàm để lấy giá từ Chainlink Price Feed:
+
+```solidity
+function getLatestPrice() public view returns (int) {
+    (
+        , 
+        int price,
+        ,
+        ,
+        
+    ) = priceFeed.latestRoundData();
+    return price;
+}
+```
+
+## Bước 5: Biên Dịch và Triển Khai
+
+1. **Biên Dịch**: Sử dụng tab "Solidity Compiler" để biên dịch hợp đồng của bạn.
+2. **Triển Khai**: Sử dụng tab "Deploy & Run Transactions" để triển khai hợp đồng lên mạng mà bạn chọn (Injected Web3 cho MetaMask hoặc JavaScript VM cho thử nghiệm cục bộ).
+
+## Bước 6: Tương Tác Với Hợp Đồng
+
+1. **Gọi Hàm**: Sau khi triển khai, bạn có thể gọi hàm `getLatestPrice` để lấy giá ETH/USD mới nhất từ Chainlink Data Feed.
+
+## Kết Luận
+
+Bằng cách tích hợp Chainlink Data Feed vào hợp đồng có sẵn, bạn có thể mở rộng khả năng của hợp đồng thông minh để tương tác với dữ liệu ngoài chuỗi một cách an toàn và đáng tin cậy. Điều này cho phép hợp đồng của bạn thực hiện các hành động dựa trên dữ liệu thực tế từ thế giới bên ngoài.

@@ -1,0 +1,70 @@
+# Event trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="tjHcsJLPSak"/>
+
+Trong Solidity, `event` là một cơ chế cho phép các hợp đồng thông minh ghi lại các hoạt động hoặc thay đổi trạng thái trên blockchain. Events tạo ra các bản ghi nhật ký (logs) mà các ứng dụng bên ngoài, như giao diện người dùng hoặc dịch vụ giám sát, có thể theo dõi và phản hồi.
+
+## Đặc Điểm của Event
+
+- **Ghi nhật ký**: Events tạo ra các bản ghi nhật ký trên blockchain, có thể được truy vấn và theo dõi bởi các ứng dụng bên ngoài.
+- **Chi phí thấp**: Ghi nhật ký bằng events tiêu tốn ít gas hơn so với lưu trữ dữ liệu trực tiếp trên blockchain.
+- **Không thể truy cập từ hợp đồng**: Các bản ghi nhật ký được tạo ra bởi events không thể được truy cập từ các hợp đồng thông minh khác.
+
+## Cách Sử Dụng Event
+
+### 1. Khai Báo Event
+
+Events được khai báo bằng từ khóa `event`, theo sau là tên và danh sách các tham số.
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+```
+
+- **`indexed`**: Từ khóa `indexed` cho phép lọc các bản ghi nhật ký theo giá trị của tham số, giúp tìm kiếm hiệu quả hơn.
+
+### 2. Kích Hoạt Event
+
+Events được kích hoạt bằng cách sử dụng từ khóa `emit`, theo sau là tên event và các giá trị tham số.
+
+```solidity
+function transfer(address to, uint256 value) public {
+    // Logic chuyển tiền
+    emit Transfer(msg.sender, to, value);
+}
+```
+
+
+## Ví Dụ về Event
+
+Dưới đây là một ví dụ minh họa cách sử dụng event trong một hợp đồng Solidity:
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract Token {
+    mapping(address => uint256) public balances;
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
+    function transfer(address to, uint256 value) public {
+        require(balances[msg.sender] >= value, "Insufficient balance");
+        balances[msg.sender] -= value;
+        balances[to] += value;
+        emit Transfer(msg.sender, to, value);
+    }
+
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;
+    }
+}
+```
+
+
+## Lợi Ích của Event
+
+- **Theo dõi hoạt động**: Cho phép theo dõi các hoạt động và thay đổi trạng thái của hợp đồng từ bên ngoài.
+- **Tích hợp dễ dàng**: Dễ dàng tích hợp với các ứng dụng bên ngoài để phản hồi các sự kiện trên blockchain.
+- **Tối ưu hóa chi phí**: Giảm chi phí gas so với lưu trữ dữ liệu trực tiếp trên blockchain.
+
+Events là một công cụ quan trọng trong Solidity để ghi lại và theo dõi các hoạt động của hợp đồng thông minh một cách hiệu quả và tiết kiệm chi phí.

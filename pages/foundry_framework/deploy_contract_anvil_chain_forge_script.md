@@ -1,0 +1,59 @@
+# Triển Khai Hợp Đồng Lên Anvil Chain Bằng `forge script`
+
+Sau khi đã cài đặt Foundry và khởi chạy Anvil, bạn có thể triển khai hợp đồng thông minh của mình lên Anvil Chain bằng cách sử dụng lệnh `forge script`. Dưới đây là các bước chi tiết để thực hiện điều này.
+
+## Bước 1: Khởi Tạo Anvil
+
+Trước tiên, hãy đảm bảo rằng Anvil đang chạy. Mở Terminal và chạy lệnh sau để khởi tạo Anvil:
+
+```bash
+anvil
+```
+
+Anvil sẽ khởi chạy một mạng blockchain cục bộ và cung cấp thông tin về các tài khoản thử nghiệm và địa chỉ RPC (thường là `http://127.0.0.1:8545`).
+
+## Bước 2: Tạo Script Triển Khai
+
+Tạo một script triển khai trong thư mục `script/`. Ví dụ, tạo tệp `Deploy.s.sol` với nội dung sau:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Script.sol";
+import "../src/Contract.sol"; // Đảm bảo đường dẫn đúng với hợp đồng của bạn
+
+contract DeployScript is Script {
+    function run() external {
+        vm.startBroadcast();
+        new Contract(); // Thay Contract bằng tên hợp đồng của bạn
+        vm.stopBroadcast();
+    }
+}
+```
+
+## Bước 3: Biên Dịch Hợp Đồng
+
+Trước khi triển khai, bạn cần biên dịch hợp đồng của mình. Chạy lệnh sau trong thư mục dự án của bạn:
+```bash
+forge build
+```
+
+Lệnh này sẽ biên dịch tất cả các hợp đồng trong thư mục `src/` và tạo ra các tệp nhị phân trong thư mục `out/`.
+
+## Bước 4: Triển Khai Hợp Đồng
+
+Sử dụng lệnh `forge script` để chạy script triển khai trên Anvil Chain. Bạn cần chỉ định địa chỉ RPC của Anvil và khóa riêng của một trong các tài khoản thử nghiệm. Dưới đây là cú pháp lệnh:
+```bash
+forge script script/Deploy.s.sol --rpc-url http://127.0.0.1:8545 --private-key <PRIVATE_KEY> --broadcast
+```
+
+- **`<PRIVATE_KEY>`**: Thay thế bằng khóa riêng của một trong các tài khoản thử nghiệm được Anvil cung cấp. Bạn có thể tìm thấy khóa riêng này trong đầu ra của lệnh `anvil`.
+
+## Bước 5: Xác Nhận Triển Khai
+
+Sau khi triển khai, `forge script` sẽ hiển thị địa chỉ của hợp đồng đã được triển khai trên Anvil Chain. Bạn có thể sử dụng địa chỉ này để tương tác với hợp đồng thông qua các công cụ như Cast hoặc các script tùy chỉnh.
+
+## Kết Luận
+
+Với `forge script`, bạn có thể dễ dàng triển khai hợp đồng thông minh lên Anvil Chain để phát triển và kiểm tra trong môi trường cục bộ. Điều này giúp bạn tiết kiệm thời gian và chi phí khi phát triển trên mạng chính, đồng thời cung cấp một môi trường an toàn để thử nghiệm các tính năng mới.

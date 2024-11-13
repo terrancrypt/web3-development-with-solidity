@@ -1,0 +1,51 @@
+# Biến `constant` trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="Nlm4Zb-acz8"/>
+
+Trong Solidity, biến `constant` là một loại biến có giá trị không thay đổi sau khi được khởi tạo. Sử dụng biến `constant` giúp tiết kiệm chi phí gas và làm cho mã nguồn dễ đọc hơn, đặc biệt khi bạn cần sử dụng một giá trị cố định nhiều lần trong hợp đồng.
+
+## Đặc điểm của biến `constant`
+
+- **Không thể thay đổi**: Giá trị của biến `constant` được xác định tại thời điểm khai báo và không thể thay đổi trong suốt vòng đời của hợp đồng.
+- **Tiết kiệm gas**: Bởi vì giá trị của biến `constant` được lưu trữ trực tiếp trong mã bytecode của hợp đồng, việc sử dụng chúng không tốn chi phí gas như các biến thông thường.
+- **Cải thiện tính rõ ràng**: Sử dụng biến `constant` giúp mã nguồn dễ đọc hơn, đặc biệt khi bạn cần sử dụng các giá trị cố định như tỷ lệ phần trăm, địa chỉ, hoặc các hằng số khác.
+
+## Cách khai báo biến `constant`
+
+Biến `constant` được khai báo bằng cách sử dụng từ khóa `constant` sau kiểu dữ liệu của biến. Dưới đây là một số ví dụ:
+
+```solidity
+pragma solidity ^0.8.0;
+contract ConstantsExample {
+    // Khai báo một biến constant cho tỷ lệ phần trăm
+    uint256 public constant PERCENTAGE = 100;
+
+    // Khai báo một biến constant cho địa chỉ
+    address public constant OWNER_ADDRESS = 0x1234567890123456789012345678901234567890;
+
+    // Khai báo một biến constant cho chuỗi ký tự
+    string public constant GREETING = "Hello, Solidity!";
+
+    function getPercentage() public pure returns (uint256) {
+        return PERCENTAGE;
+    }
+
+    function getOwnerAddress() public pure returns (address) {
+        return OWNER_ADDRESS;
+    }
+
+    function getGreeting() public pure returns (string memory) {
+        return GREETING;
+    }
+}
+```
+
+## Lợi ích của việc sử dụng biến `constant`
+
+- **Hiệu suất**: Giảm chi phí gas khi truy cập các giá trị cố định.
+- **Bảo trì**: Dễ dàng thay đổi giá trị cố định tại một nơi duy nhất trong mã nguồn.
+- **Tính rõ ràng**: Giúp mã nguồn dễ đọc và dễ hiểu hơn.
+
+Sử dụng biến `constant` là một thực hành tốt trong Solidity khi bạn cần làm việc với các giá trị không thay đổi. Điều này không chỉ giúp tối ưu hóa chi phí mà còn cải thiện tính rõ ràng và bảo trì của mã nguồn.

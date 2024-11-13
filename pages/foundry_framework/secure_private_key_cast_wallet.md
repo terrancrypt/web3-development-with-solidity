@@ -1,0 +1,40 @@
+# Bảo Mật Private Key Bằng `cast wallet`
+
+## Giới thiệu
+
+`cast wallet` là một công cụ trong Foundry giúp bạn tạo và quản lý ví Ethereum một cách an toàn. Nó cho phép bạn tạo ra các private key mới và lưu trữ chúng một cách an toàn, tránh việc lưu trữ trực tiếp trong mã nguồn hoặc script.
+
+## Bước 1: Tạo ví mới
+
+Để tạo một ví mới với `cast wallet`, bạn có thể sử dụng lệnh sau trong Terminal:
+
+```bash
+cast wallet new
+```
+
+Lệnh này sẽ tạo ra một ví mới và hiển thị địa chỉ ví cùng với private key. Hãy chắc chắn lưu trữ private key ở một nơi an toàn và không chia sẻ nó với bất kỳ ai.
+
+## Bước 2: Lưu trữ Private Key an toàn
+
+- **Sử dụng Tệp Môi Trường**: Lưu trữ private key trong một tệp môi trường (ví dụ: `.env`) và sử dụng thư viện như `dotenv` để tải nó vào mã nguồn của bạn một cách an toàn.
+- **Sử dụng Trình Quản Lý Mật Khẩu**: Sử dụng các trình quản lý mật khẩu như LastPass hoặc 1Password để lưu trữ private key của bạn.
+
+## Bước 3: Sử dụng Private Key trong Script
+
+Khi triển khai hợp đồng hoặc thực hiện các giao dịch, bạn có thể sử dụng private key từ tệp môi trường. Dưới đây là một ví dụ về cách sử dụng private key trong script triển khai:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Script.sol";
+import "../src/Contract.sol";
+
+contract DeployScript is Script {
+    function run() external {
+        vm.startBroadcast();
+        new Contract(); // Thay Contract bằng tên hợp đồng của bạn
+        vm.stopBroadcast();
+    }
+}
+```

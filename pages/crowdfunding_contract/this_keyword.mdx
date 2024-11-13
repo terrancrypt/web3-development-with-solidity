@@ -1,0 +1,69 @@
+# Từ khóa `this` trong Solidity
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="M-XxRIgxJYg"/>
+
+Trong Solidity, từ khóa `this` được sử dụng để tham chiếu đến hợp đồng hiện tại. Nó có thể được sử dụng để truy cập các thuộc tính và hàm của hợp đồng từ bên trong chính hợp đồng đó. `this` là một cách để tương tác với chính hợp đồng như thể nó là một đối tượng.
+
+## Cách sử dụng chính của `this`
+
+### 1. Truy cập địa chỉ của hợp đồng
+
+- `this` có thể được sử dụng để lấy địa chỉ của hợp đồng hiện tại. Điều này hữu ích khi bạn cần gửi Ether đến chính hợp đồng hoặc khi bạn cần sử dụng địa chỉ hợp đồng trong các giao dịch khác.
+
+```solidity
+address contractAddress = address(this);
+```
+
+### 2. Gọi hàm nội bộ
+
+- `this` có thể được sử dụng để gọi các hàm công khai của hợp đồng từ bên trong hợp đồng. Tuy nhiên, điều này sẽ thực hiện một cuộc gọi bên ngoài, có nghĩa là nó sẽ tiêu tốn thêm gas và không thể truy cập các biến trạng thái nội bộ trực tiếp.
+
+```solidity
+function callInternalFunction() public {
+    this.somePublicFunction();
+}
+```
+
+### 3. Kiểm tra số dư của hợp đồng
+
+- `this` có thể được sử dụng để kiểm tra số dư Ether của hợp đồng hiện tại.
+
+```solidity
+uint contractBalance = address(this).balance;
+```
+
+## Ví dụ về sử dụng `this`
+
+Dưới đây là một ví dụ minh họa cách sử dụng `this` trong một hợp đồng Solidity:
+
+```solidity
+pragma solidity ^0.8.0;
+
+contract ThisExample {
+    // Trả về địa chỉ của hợp đồng
+    function getContractAddress() public view returns (address) {
+        return address(this);
+    }
+
+    // Trả về số dư của hợp đồng
+    function getContractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
+    // Gọi một hàm công khai khác trong hợp đồng
+    function callAnotherFunction() public {
+        this.getContractBalance();
+    }
+}
+```
+
+
+## Lưu ý
+
+- **Gas**: Khi sử dụng `this` để gọi các hàm công khai, hãy nhớ rằng điều này sẽ tiêu tốn thêm gas do thực hiện một cuộc gọi bên ngoài.
+- **Truy cập biến trạng thái**: Sử dụng `this` để gọi hàm sẽ không cho phép truy cập trực tiếp vào các biến trạng thái nội bộ của hợp đồng.
+
+Từ khóa `this` là một công cụ hữu ích trong Solidity để tương tác với chính hợp đồng, nhưng cần được sử dụng cẩn thận để tránh các vấn đề về hiệu suất và bảo mật.
+
