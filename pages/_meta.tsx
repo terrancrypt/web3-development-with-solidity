@@ -5,7 +5,7 @@ export default {
   contract_factory: '#3: Contract Factory',
   crowdfunding_contract: '#4: Crowdfunding Contract',
   foundry_framework: '#5: Foundry Framework',
-  smart_contract_testing: '#6: Smart Contract Testing',
+  contract_testing: '#6: Smart Contract Testing',
   web3_front_end: '#7: Web3 Front-end',
   vbi: {
     title: 'VBI Academy',
