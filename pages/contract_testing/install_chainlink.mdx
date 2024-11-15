@@ -1,0 +1,24 @@
+# Install Chainlink Library trong Foundry
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="gT9Dc7yoWUQ"/>
+
+Ở trên video là một cách, ở dưới là cách khách để cài đặt Chainlink Library.
+
+## Bước 1: Thêm Chainlink Library
+
+Trong dự án Foundry của bạn, mở tệp foundry.toml và thêm thư viện Chainlink vào phần dependencies:
+
+```toml
+[dependencies]
+chainlink = { git = "https://github.com/smartcontractkit/chainlink.git", tag = "v2.14.0" }
+```
+
+Hãy thay thế v2.14.0 bằng phiên bản mới nhất của thư viện Chainlink nếu cần.
+
+## Bước 2: Cài đặt Dependencies
+
+```bash
+forge install
+```

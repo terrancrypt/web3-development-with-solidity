@@ -1,0 +1,50 @@
+# Kiểm tra Độ Bao Phủ (Coverage)
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="OoAgy7PmID4"/>
+
+Testing coverage giúp bạn xác định phần nào của mã đã được kiểm tra và phần nào chưa, từ đó cải thiện chất lượng kiểm thử. Dưới đây là cách thực hiện cho một dự án Foundry đã có sẵn.
+
+## Bước 1: Đảm bảo Test Cases Đã Được Viết
+
+Trước tiên, hãy chắc chắn rằng bạn đã viết các test case cho smart contracts của mình trong thư mục `test/`. Ví dụ:
+
+```solidity
+// test/MyContract.t.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../src/MyContract.sol";
+
+contract MyContractTest is Test {
+    MyContract myContract;
+
+    function setUp() public {
+        myContract = new MyContract();
+    }
+
+    function testSetValue() public {
+        myContract.setValue(42);
+        assertEq(myContract.value(), 42);
+    }
+}
+```
+
+## Bước 2: Chạy Coverage
+
+Để kiểm tra độ bao phủ, bạn có thể sử dụng lệnh sau trong thư mục gốc của dự án:
+
+```bash
+forge coverage
+```
+
+
+Lệnh này sẽ chạy tất cả các test case và tạo ra một báo cáo về độ bao phủ của mã.
+
+## Bước 3: Xem Báo Cáo Coverage
+
+Sau khi chạy lệnh `forge coverage`, bạn sẽ nhận được một báo cáo chi tiết về độ bao phủ của mã. Báo cáo này sẽ cho bạn biết phần trăm mã đã được kiểm tra và chỉ ra các phần chưa được kiểm tra.
+
+Kiểm tra độ bao phủ là một bước quan trọng để đảm bảo rằng smart contracts của bạn được kiểm tra đầy đủ và không có lỗi tiềm ẩn. Sử dụng công cụ coverage của Foundry giúp bạn cải thiện chất lượng kiểm thử và độ tin cậy của hợp đồng.

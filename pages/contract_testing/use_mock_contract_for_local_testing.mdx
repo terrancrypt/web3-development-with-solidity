@@ -1,0 +1,65 @@
+# Sử dụng Mock Contract cho Local Testing với Foundry
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="MjmBz35icSc"/>
+
+Mock contracts cho phép bạn mô phỏng hành vi của các hợp đồng hoặc dịch vụ bên ngoài, giúp bạn kiểm tra các tương tác mà không cần triển khai thực tế. Dưới đây là cách thiết lập và sử dụng mock contracts trong Foundry.
+
+## Bước 1: Tạo Mock Contract
+
+Giả sử bạn có một smart contract `MyContract` phụ thuộc vào một contract khác, `ExternalContract`. Bạn có thể tạo một mock contract cho `ExternalContract` như sau:
+
+```solidity
+// src/MockExternalContract.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract MockExternalContract {
+    function getValue() external pure returns (uint256) {
+        return 100; // Giá trị giả lập
+    }
+}
+```
+
+## Bước 2: Sử dụng Mock Contract trong Test
+
+Trong file test, bạn có thể sử dụng mock contract để kiểm tra `MyContract`. Dưới đây là ví dụ về cách sử dụng mock contract:
+
+```solidity
+// test/MyContract.t.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../src/MyContract.sol";
+import "../src/MockExternalContract.sol";
+
+contract MyContractTest is Test {
+    MyContract myContract;
+    MockExternalContract mockExternal;
+
+    function setUp() public {
+        mockExternal = new MockExternalContract();
+        myContract = new MyContract(address(mockExternal));
+    }
+
+    function testInteractionWithExternal() public {
+        uint256 value = myContract.getValueFromExternal();
+        assertEq(value, 100); // Kiểm tra giá trị trả về từ mock contract
+    }
+}
+```
+
+## Bước 3: Chạy Test
+
+Sau khi thiết lập mock contract và test case, bạn có thể chạy test bằng lệnh:
+
+```bash
+forge test
+```
+
+
+Lệnh này sẽ biên dịch và chạy tất cả các test case, bao gồm cả những test sử dụng mock contracts.
+
+Mock contracts là công cụ hữu ích để kiểm tra các tương tác với các hợp đồng hoặc dịch vụ bên ngoài mà không cần triển khai thực tế. Điều này giúp bạn đảm bảo rằng smart contracts của bạn hoạt động chính xác trong mọi tình huống.

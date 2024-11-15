@@ -1,0 +1,61 @@
+# Tạo Script Tương Tác với Smart Contracts trong Foundry
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="C8lXk-jwnvY"/>
+
+Scripts tương tác cho phép bạn thực hiện các giao dịch hoặc gọi các hàm của smart contracts từ dòng lệnh. Dưới đây là cách tạo và chạy một script tương tác trong Foundry.
+
+## Bước 1: Tạo Script
+
+Trong thư mục `script/` của dự án, tạo một file script mới. Ví dụ, tạo file `Interact.s.sol`:
+
+```solidity
+// script/Interact.s.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Script.sol";
+import "../src/MyContract.sol";
+
+contract InteractScript is Script {
+    function run() external {
+        // Đọc private key từ biến môi trường
+        uint256 privateKey = vm.envUint("PRIVATE_KEY");
+
+        // Khởi tạo ví với private key
+        vm.startBroadcast(privateKey);
+
+        // Tương tác với hợp đồng
+        MyContract myContract = MyContract(0xYourContractAddress);
+        myContract.setValue(42);
+
+        // Kết thúc broadcast
+        vm.stopBroadcast();
+    }
+}
+```
+
+
+## Bước 2: Cấu hình Biến Môi Trường
+
+Trước khi chạy script, bạn cần cấu hình biến môi trường cho private key. Bạn có thể làm điều này trong terminal:
+
+```bash
+export PRIVATE_KEY=your_private_key_here
+```
+
+
+Thay thế `your_private_key_here` bằng private key của bạn.
+
+## Bước 3: Chạy Script
+
+Chạy script bằng lệnh sau:
+
+```bash
+forge script script/Interact.s.sol:InteractScript --rpc-url https://your_rpc_url --broadcast
+```
+
+Thay thế `https://your_rpc_url` bằng URL RPC của mạng mà bạn muốn tương tác.
+
+Scripts tương tác là một công cụ mạnh mẽ để thực hiện các giao dịch hoặc gọi các hàm của smart contracts từ dòng lệnh. Điều này giúp bạn dễ dàng kiểm tra và tương tác với các hợp đồng của mình trong môi trường thực tế.

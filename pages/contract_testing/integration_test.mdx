@@ -1,0 +1,66 @@
+# Integration Testing trong Dự án Foundry
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="Tr_-eQbQEOg"/>
+
+Integration testing giúp bạn kiểm tra sự tương tác giữa các smart contracts và các thành phần khác trong hệ thống. Dưới đây là cách thực hiện integration testing trong Foundry.
+
+## Bước 1: Cấu trúc Dự án
+
+Đảm bảo rằng bạn đã có một dự án Foundry với các smart contracts và test cases cơ bản. Thư mục dự án của bạn nên có cấu trúc như sau:
+
+```
+/my-foundry-project
+  /src
+    MyContract.sol
+    AnotherContract.sol
+  /test
+    IntegrationTest.t.sol
+  foundry.toml
+```
+
+
+## Bước 2: Viết Integration Test
+
+Tạo một file test trong thư mục `test/` để kiểm tra sự tương tác giữa các hợp đồng. Ví dụ, tạo file `IntegrationTest.t.sol`:
+
+```solidity
+// test/IntegrationTest.t.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../src/MyContract.sol";
+import "../src/AnotherContract.sol";
+
+contract IntegrationTest is Test {
+    MyContract myContract;
+    AnotherContract anotherContract;
+
+    function setUp() public {
+        myContract = new MyContract();
+        anotherContract = new AnotherContract();
+    }
+
+    function testIntegration() public {
+        // Kiểm tra sự tương tác giữa MyContract và AnotherContract
+        myContract.setValue(42);
+        uint256 result = anotherContract.calculate(myContract.value());
+        assertEq(result, 84); // Giả sử hàm calculate nhân đôi giá trị
+    }
+}
+```
+
+
+## Bước 3: Chạy Integration Test
+
+Chạy các integration test bằng lệnh:
+
+```bash
+forge test
+```
+
+Lệnh này sẽ biên dịch và chạy tất cả các test case, bao gồm cả integration tests.
+
+Integration testing là một phần quan trọng để đảm bảo rằng các smart contracts của bạn hoạt động chính xác khi tương tác với nhau. Sử dụng Foundry để thực hiện integration testing giúp bạn phát hiện sớm các vấn đề tiềm ẩn trong hệ thống.

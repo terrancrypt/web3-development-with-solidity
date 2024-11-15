@@ -1,0 +1,55 @@
+# Thiết lập Test Case và Test File trong Solidity với Foundry
+
+import { YouTubePlayer } from "../../components/YouTubePlayer.tsx";
+
+<YouTubePlayer videoId="KXw8GsPkzw8"/>
+
+Nếu bạn đã cài đặt Foundry và có một dự án sẵn, bạn có thể dễ dàng thêm test case và test file cho smart contracts của mình. Dưới đây là các bước thực hiện:
+
+## Bước 1: Tạo Test File
+
+Trong thư mục dự án của bạn, điều hướng đến thư mục `test/`. Tạo một file test mới cho smart contract của bạn. Ví dụ, nếu bạn có một contract tên là `MyContract`, bạn có thể tạo file `MyContract.t.sol`:
+
+```solidity
+// test/MyContract.t.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../src/MyContract.sol";
+
+contract MyContractTest is Test {
+    MyContract myContract;
+
+    function setUp() public {
+        myContract = new MyContract();
+    }
+
+    function testSetValue() public {
+        myContract.setValue(42);
+        assertEq(myContract.value(), 42);
+    }
+}
+```
+
+
+## Bước 2: Viết Test Case
+
+Trong file test, bạn có thể viết các test case để kiểm tra các chức năng của smart contract. Sử dụng thư viện `forge-std/Test.sol` để tận dụng các hàm hỗ trợ kiểm thử.
+
+- **setUp()**: Hàm này được gọi trước mỗi test case, dùng để khởi tạo trạng thái ban đầu.
+- **testSetValue()**: Đây là một ví dụ về test case kiểm tra hàm `setValue` của `MyContract`.
+
+## Bước 3: Chạy Test
+
+Sau khi viết xong các test case, bạn có thể chạy chúng bằng lệnh:
+
+```bash
+forge test
+```
+
+Lệnh này sẽ biên dịch và chạy tất cả các test case trong thư mục `test/` của dự án.
+
+## Kết luận
+
+Việc thêm test case vào dự án Solidity của bạn với Foundry rất đơn giản và giúp đảm bảo rằng smart contracts của bạn hoạt động chính xác và an toàn. Hãy chắc chắn rằng bạn đã kiểm tra tất cả các chức năng quan trọng của hợp đồng trước khi triển khai.
